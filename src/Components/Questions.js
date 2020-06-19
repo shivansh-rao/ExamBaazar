@@ -70,11 +70,6 @@ export class Questions extends Component {
                 {ques.map((q,index)=>
                     <div key={index}>
                         <h2>{q.question}</h2>
-                        {q.images.map((im,index)=>
-                            <div key={index}>
-                              <img src={im.type} />
-                              </div>
-                        )}
                         <hr></hr>
                         <form onSubmit={this.next}>
                         {q.options.map((op,index)=>
