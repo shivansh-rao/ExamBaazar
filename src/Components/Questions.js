@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import process.env from 'dotenv'
-// require('dotenv').config()
+
 export class Questions extends Component {
     constructor(props) {
         super(props)
@@ -17,8 +16,8 @@ export class Questions extends Component {
     componentDidMount=()=>{
         
       var  api={
-           api_key: '8107065529',
-           api_secret: '5ee9d77168192338799149e3',
+           api_key: REACT_APP_KEY,
+           api_secret: REACT_APP_SECRET,
            examId:this.props.match.params.id
                 }
             
@@ -129,7 +128,7 @@ export class Questions extends Component {
                                     {   ques.map((q,index)=>
                                         <div key={index}>
                                             <h2>{q.question}</h2>
-                                            {/* <h4>Correct:({q.marking.correct})  ,  Incorrect:({q.marking.incorrect})</h4> */}
+                                            <h4>Correct:({q.marking.correct})  ,  Incorrect:({q.marking.incorrect})</h4>
                                             <hr></hr>
                                 
                                             <input type="text" onChange={this.output} />
