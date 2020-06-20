@@ -7,7 +7,7 @@ export class Questions extends Component {
         var arr=[];
         localStorage.setItem('pre',JSON.stringify(arr));
         this.state = {
-             ques:[{type:'abs'}],
+             ques:[],
              abo:[],
              text:''
         }
@@ -16,8 +16,8 @@ export class Questions extends Component {
     componentDidMount=()=>{
         
       var  api={
-           api_key: REACT_APP_KEY,
-           api_secret: REACT_APP_SECRET,
+           api_key: '####',
+           api_secret: '#####',
            examId:this.props.match.params.id
                 }
             
@@ -41,6 +41,8 @@ export class Questions extends Component {
         e.preventDefault();
         this.setState({text:e.target.value})
     }
+
+
     next=(e)=>{
         var a=localStorage.getItem('pre');
         var arr=JSON.parse(a);
@@ -62,9 +64,11 @@ export class Questions extends Component {
                         abo:previous});}
        else{
         
-           this.setState({ques:[{type:'abs'}],abo:[]})
+           this.setState({ques:[],abo:[]})
        }
     }
+
+
     render() {
         var {ques,abo}=this.state
         var q=this.state.ques
@@ -80,18 +84,12 @@ export class Questions extends Component {
             var pic=<img src={abo.images}/>
         }
 
-        var type=q[0].type;
-
-        //for mcq type
-
-        if(type==="mcq")
-        {
             return (
             <div>
                 <p>{abo.test}</p>
                 <h1>{abo.context}</h1>
                 <div className="row">{pic}</div>
-                <form onSubmit={this.next}>
+                
                 {   ques.map((q,index)=>
                     <div key={index}>
                         
@@ -99,51 +97,29 @@ export class Questions extends Component {
                            
                         <h4>Correct:({q.marking.correct}) ,  Incorrect:({q.marking.incorrect})</h4>
                         <hr></hr>
-                        
-                        {   q.options.map((op,index)=>
+                        <form onSubmit={this.next}>
+                        { (q.type==='mcq')?(q.options.map((op,index)=>
                                 <div key={index}>
-                                    <label ><h3><strong>{index+1}   -  </strong><em>{op.option}</em></h3></label>
-                                    <input type="checkbox" />
-                                </div>
-                        )}
+                                    <label ><h3><strong>{index+1}   -  </strong><em>{op.option}</em></h3>
+                        {(q.mcqma)?<input type="checkbox" />:<div className="radio"><input type="radio" /></div>}</label>
+                                 </div>))
+                        :<input type="text" onChange={this.output} style={{color:'black'}} />}
+                                    
+                        
+                        <input type="submit"></input>
+                        </form>
                         
                      </div>
                 )}
-                        <input type="submit"></input>
-                        </form>
+                
                         <button onClick={this.next} className="">Next</button>
                         <button onClick={this.prev} className="">Previous</button>
             </div>
-        )
-                        }
-
-                        //for numerical type
-         else{
-             return(
-                    <div>
-                        <p>{abo.test}</p>
-                               <h1>{abo.context}</h1>
-                            <div className="row">{pic}</div>
-                                <form onSubmit={this.next}>
-                                    {   ques.map((q,index)=>
-                                        <div key={index}>
-                                            <h2>{q.question}</h2>
-                                            <h4>Correct:({q.marking.correct})  ,  Incorrect:({q.marking.incorrect})</h4>
-                                            <hr></hr>
-                                
-                                            <input type="text" onChange={this.output} />
-                                
-                                        </div>
-                                    )}
-                                            <input type="submit" />
-                                </form>
-                                            <button onClick={this.next} className="">Next</button>
-                                            <button onClick={this.prev} className="">Previous</button>
-                    </div>
+        
                                 
                             )
                         }
     }
-}
+
 
 export default Questions

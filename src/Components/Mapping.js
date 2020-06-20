@@ -4,9 +4,7 @@ function Mapping(props) {
     var streams=props.stream;
     var exams=props.exam;
     var related=exams.filter(a=>a.stream===streams);
-    console.log(related);
-    console.log(streams);
-    console.log(exams);
+    
     return (
         <React.Fragment>
             <div className="row" >

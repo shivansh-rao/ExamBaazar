@@ -12,7 +12,7 @@ export class Home extends Component {
         }
     }
     componentDidMount=()=>{
-        var api_key=REACT_APP_KEY;
+        var api_key='####';
         axios.get('https://www.exambazaar.com/api/coding-round/routes/exam-info/'+api_key)
         .then(response=>{
              console.log(response.data.data.exams);
