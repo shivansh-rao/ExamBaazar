@@ -8,12 +8,10 @@ function App() {
   return (
     <Router>
     <div className="App">
-      <header className="App-header">
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/questions/:id" component={Questions}/>
         </Switch>
-      </header>
     </div>
     </Router>
   );

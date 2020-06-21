@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import '../App.css'
 
 function Mapping(props) {
     var streams=props.stream;
@@ -7,26 +9,21 @@ function Mapping(props) {
     
     return (
         <React.Fragment>
-            <div className="row" >
-                   { related.map((d)=>
-                      <div key={d._id} className="col-md-3 col-sm-6">
-                          <div className="thumbnail">
-                              <img src={d.logo}/>
-                              
-                                  <div className="caption">
-                                      <h4>
-                                          {d.name}
-                                      </h4>
-                                      
-                                      <p>
-                                          <a href={`/questions/${d._id}`} className="btn btn-primary">Related Questions...</a>
-                                      </p>
-                                  </div>
-                          </div>
-                      </div>
+                   { related.map((d,i)=>
+                   <a href={`/questions/${d._id}`}>
+                          <li key={i}>
+                              <span id="img" className='pull-right'><img id="abc" src={d.logo}/></span>
+                             
+                                <span className="caption">
+                                    <h2>{d.name}</h2>
+                                    <h4>Rank-{d.rank}</h4>
+                                </span>
+                                  
+                          </li>
+                   </a>
                    )}
-              </div>
           </React.Fragment>
+          
         
     )
 }

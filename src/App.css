@@ -1,38 +1,74 @@
-.App {
+body {
+  background:url('https://images.unsplash.com/photo-1528459458967-d78e2fd34a9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=383&q=800');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: lato;
+  background-color: #838c9e;
+  color: white;
+  /* padding: 40px; */
+  /* font-family: Arial; */
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+ html{
+                	    height: 100%;
+                   }
+  .jumbotron{
+    background:black;
+    margin:5px 50px 10px 50px;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  #thumbnail{
+    background: linear-gradient(rgb(60, 218, 157), rgb(183, 192, 218));
+    height: 200px;
+    width:200px;
+    border-radius: 100px;
+    text-align: center;
+    margin:0px 200px 0px 200px;
+    
   }
-  to {
-    transform: rotate(360deg);
+  .dropdown-menu{
+    background:none;
+    padding:5px;
+    border:none;
+    margin-left: 300px;
+    margin-right: 300px;
+    width:30%;
   }
-}
+  #a{
+    text-align: center;
+    padding-top: 35%;
+  }
+
+  #head{
+    letter-spacing: 3px;
+    height: 100px;
+  }
+  li{
+    /* background: none; */
+    margin:5px;
+    height: 100px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    padding:2px;
+    /* height:50px; */
+    /* width: */
+  }
+  #abc{
+    max-width: 100px;
+    max-height: 90px; 
+    min-height: 90px;
+    min-width:100px;
+    padding:1px;
+    border:none;
+    
+  }
+  #img{
+    border:none;
+  }
+  li{
+    background: linear-gradient(rgb(60, 218, 157), rgb(183, 192, 218));
+  }
+   
