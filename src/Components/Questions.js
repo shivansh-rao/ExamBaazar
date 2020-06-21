@@ -17,8 +17,8 @@ export class Questions extends Component {
     componentDidMount=()=>{
         
       var  api={
-           api_key: 8107065529,
-           api_secret: '5ee9d77168192338799149e3',
+           api_key: '#####',
+           api_secret: '##########',
            examId:this.props.match.params.id
                 }
             
