@@ -18,8 +18,8 @@ export class Questions extends Component {
     componentWillMount=()=>{
         
       var  api={
-           api_key: 8107065529,
-           api_secret: '5ee9d77168192338799149e3',
+           api_key: "#######",
+           api_secret: '###########',
            examId:this.props.match.params.id
                 }
             
@@ -30,11 +30,10 @@ export class Questions extends Component {
             }
                 )
         .then(res=>{
-            console.log(res.data)
             this.setState({ques:res.data.data.question.questions,
                             abo:res.data.data.question,text:'',radio:'',checkbox:''});
             var q=this.state.abo;
-            console.log(q);
+            
         })
         .catch(err=>console.log(err))
     }
@@ -51,7 +50,7 @@ export class Questions extends Component {
     next=(e)=>{
         var a=localStorage.getItem('pre');
         var arr=JSON.parse(a);
-        console.log(arr)
+        
         arr.push(this.state.abo)
         localStorage.setItem('pre',JSON.stringify(arr));
         this.componentWillMount();
@@ -63,15 +62,14 @@ export class Questions extends Component {
        var prev=JSON.parse(p);
     
        if(prev.length===1)
-       {console.log(prev.length)
-       console.log(prev)
+       {
        var arr=[{}];
        localStorage.setItem('pre',JSON.stringify(arr));
        this.setState({ques:this.state.ques,
                         abo:this.state.abo,text:'',radio:'',checkbox:''});}
     
        else{
-           console.log(prev.length)
+           
            var previous=prev.pop();
             localStorage.setItem('pre',JSON.stringify(prev));
             this.setState({ques:previous.questions,
