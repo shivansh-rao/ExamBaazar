@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+// 58ac27030be6311eccbbc3a6?
 export class Questions extends Component {
     constructor(props) {
         super(props)
@@ -17,8 +17,8 @@ export class Questions extends Component {
     componentDidMount=()=>{
         
       var  api={
-           api_key: '######',
-           api_secret: '######',
+           api_key: 8107065529,
+           api_secret: '5ee9d77168192338799149e3',
            examId:this.props.match.params.id
                 }
             
@@ -106,35 +106,43 @@ export class Questions extends Component {
 
             return (
             <div>
-
+              <div id="que">
                 <div>
-                <p className="pull-left">{abo.test}-{abo.examsection}</p><br/>
-                <h1>{abo.context}</h1>
-                <div className="row">{pic}</div>
+                    <p className="pull-left">{abo.test}-{abo.examsection}</p><br/>
+                        <h1>{abo.context}</h1>
+                            <div className="row">{pic}</div><hr></hr>
                 </div>
-                {   ques.map((q,index)=>
-                    <div key={index} >
+                <div>
+                { ques.map((q,index)=>
+                    <div style={{textAlign:'left'}}key={index} >
                         
-                        <h2>{q.question}</h2>
-                        <h4 className="pull-right">Correct:({q.marking.correct})   ,  Incorrect:({q.marking.incorrect})</h4><br/>
-                        <hr></hr>
-                        <div>
+                        <div><h2><strong style={{color:'brown'}}>Question:  {index+1}</strong><br/><br/>{q.question}</h2></div><br/>
+                        <div className="pull-right"><h4 id="marking"><em style={{color:'brown'}}>Correct:</em>({q.marking.correct})   ,  <em style={{color:'brown'}}>Incorrect:</em>({q.marking.incorrect})</h4></div><hr/><br/><br/>
+                        <div><br/>
+                         <div style={{textAlign:'left'}}id="option">  
                         <form onSubmit={this.stay}>
+                            
                         { (q.type==='mcq')?(q.options.map((op,index)=>
-                                <div key={index}>
-                                    <label ><h3><strong>{index+1} -  </strong><em>{op.option}</em></h3></label>
-                        {(q.mcqma)?<input value={this.state.mark} name='mark' onChange={this.output} type="checkbox" />
-                        :<input name='mark' value={this.state.mark} onChange={this.output} type="radio" />}
-                                 </div>))
-                        :<input type="text" name='text' value={this.state.text} onChange={this.output} style={{color:'black'}} />}
+                                <li key={index}>
+                                  
+                        <span><h3><em>{op.option}     </em>{(q.mcqma)?<input value={this.state.mark} name='mark' onChange={this.output} type="checkbox" />
+                        :<input name='mark' value={this.state.mark} onChange={this.output} type="radio" />}</h3></span><br/>
+                            
+                             </li>))
+                        :<input type="text" name='text' value={this.state.text} onChange={this.output} style={{color:'black'}} />}<br/><br/>
                                     
                         
-                        <button type="submit" className="btn btn-primary">Mark</button>
+                        <button type="submit" className="btn btn-lg btn-primary">Mark</button>
+                    
                         </form>
+
                         </div>
+                        </div><br/><hr></hr>
                         
                      </div>
                 )}
+                </div>
+              </div>
                         <button onClick={this.next} className="btn btn-lg btn-success pull-right">Next</button>
                         
                         <button onClick={this.prev} className="btn btn-lg btn-success pull-left">Previous</button>
