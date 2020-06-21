@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// 58ac27030be6311eccbbc3a6?
 export class Questions extends Component {
     constructor(props) {
         super(props)
@@ -10,7 +9,8 @@ export class Questions extends Component {
              ques:[],
              abo:[],
              text:'',
-             mark:''
+             radio:'',
+             checkbox:''
         }
     }
 
@@ -31,7 +31,7 @@ export class Questions extends Component {
         .then(res=>{
             console.log(res.data)
             this.setState({ques:res.data.data.question.questions,
-                            abo:res.data.data.question,text:'',mark:''});
+                            abo:res.data.data.question,text:'',radio:'',checkbox:''});
             var q=this.state.abo;
             console.log(q);
         })
@@ -39,17 +39,12 @@ export class Questions extends Component {
     }
 
     output=(e)=>{
-        e.preventDefault();
         this.setState({[e.target.name]:e.target.value})
     }
 
     stay=(e)=>{
-         e.preventDefault();
-        this.setState({mark:e.target.value})
-    }
-
-    tick=(e)=>{
         e.preventDefault();
+        this.setState({mark:e.target.value})
     }
 
     next=(e)=>{
@@ -57,7 +52,7 @@ export class Questions extends Component {
         var arr=JSON.parse(a);
         arr.push(this.state.abo)
         localStorage.setItem('pre',JSON.stringify(arr));
-         e.preventDefault();
+        e.preventDefault();
         this.componentDidMount();
     }
 
@@ -72,7 +67,7 @@ export class Questions extends Component {
        var arr=[];
        localStorage.setItem('pre',JSON.stringify(arr));
        this.setState({ques:previous,
-                        abo:previous,text:'',mark:''});}
+                        abo:previous,text:'',radio:'',checkbox:''});}
        else if(prev.length===0){
            console.log(prev.length)
             this.setState({ques:[],abo:[],text:'',mark:''})
@@ -84,7 +79,7 @@ export class Questions extends Component {
            var previous=prev.pop();
             localStorage.setItem('pre',JSON.stringify(prev));
             this.setState({ques:previous.questions,
-                        abo:previous,text:'',mark:''});
+                        abo:previous,text:'',radio:'',checkbox:''});
        }
     }
 
@@ -120,15 +115,16 @@ export class Questions extends Component {
                         <div className="pull-right"><h4 id="marking"><em style={{color:'brown'}}>Correct:</em>({q.marking.correct})   ,  <em style={{color:'brown'}}>Incorrect:</em>({q.marking.incorrect})</h4></div><hr/><br/><br/>
                         <div><br/>
                          <div style={{textAlign:'left'}}id="option">  
+
                         <form onSubmit={this.stay}>
                             
                         { (q.type==='mcq')?(q.options.map((op,index)=>
-                                <li key={index}>
+                                <div id="li" style={{marginLeft:'5px'}} key={index}>
                                   
-                        <span><h3><em>{op.option}     </em>{(q.mcqma)?<input value={this.state.mark} name='mark' onChange={this.output} type="checkbox" />
-                        :<input name='mark' value={this.state.mark} onChange={this.output} type="radio" />}</h3></span><br/>
+                        <span><h3><em>{op.option}     </em>{(q.mcqma)?<input value={this.state.checkbox} name='checkbox' onChange={this.output} type="checkbox" />
+                        :<input name='radio' value={this.state.radio} onChange={this.output} type="radio" />}</h3></span><br/>
                             
-                             </li>))
+                             </div>))
                         :<input type="text" name='text' value={this.state.text} onChange={this.output} style={{color:'black'}} />}<br/><br/>
                                     
                         
