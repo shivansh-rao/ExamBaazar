@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+
 export class Questions extends Component {
     constructor(props) {
         super(props)
-        var arr=[];
+        var arr=[{}];
         localStorage.setItem('pre',JSON.stringify(arr));
         this.state = {
              ques:[],
@@ -14,11 +15,11 @@ export class Questions extends Component {
         }
     }
 
-    componentDidMount=()=>{
+    componentWillMount=()=>{
         
       var  api={
-           api_key: '#####',
-           api_secret: '##########',
+           api_key: 8107065529,
+           api_secret: '5ee9d77168192338799149e3',
            examId:this.props.match.params.id
                 }
             
@@ -39,21 +40,21 @@ export class Questions extends Component {
     }
 
     output=(e)=>{
-        this.setState({[e.target.name]:e.target.value})
+         this.setState({[e.target.text]:e.target.value})
     }
 
     stay=(e)=>{
         e.preventDefault();
-        this.setState({mark:e.target.value})
+         this.setState({[e.target.name]:e.target.value})
     }
 
     next=(e)=>{
         var a=localStorage.getItem('pre');
         var arr=JSON.parse(a);
+        console.log(arr)
         arr.push(this.state.abo)
         localStorage.setItem('pre',JSON.stringify(arr));
-        e.preventDefault();
-        this.componentDidMount();
+        this.componentWillMount();
     }
 
     prev=()=>{
@@ -63,26 +64,25 @@ export class Questions extends Component {
     
        if(prev.length===1)
        {console.log(prev.length)
-       var previous=prev.pop();
-       var arr=[];
+       console.log(prev)
+       var arr=[{}];
        localStorage.setItem('pre',JSON.stringify(arr));
-       this.setState({ques:previous,
-                        abo:previous,text:'',radio:'',checkbox:''});}
-       else if(prev.length===0){
-           console.log(prev.length)
-            this.setState({ques:[],abo:[],text:'',mark:''})
-            var arr=[];
-            localStorage.setItem('pre',JSON.stringify(arr));
-       }
+       this.setState({ques:this.state.ques,
+                        abo:this.state.abo,text:'',radio:'',checkbox:''});}
+    
        else{
            console.log(prev.length)
            var previous=prev.pop();
             localStorage.setItem('pre',JSON.stringify(prev));
             this.setState({ques:previous.questions,
-                        abo:previous,text:'',radio:'',checkbox:''});
+                          abo:previous,text:'',radio:'',checkbox:''});
        }
     }
 
+    componentWillUnmount=()=>{
+        localStorage.clear();
+    }
+    
 
     render() {
         var {ques,abo}=this.state
@@ -103,7 +103,7 @@ export class Questions extends Component {
             <div>
               <div id="que">
                 <div>
-                    <p className="pull-left">{abo.test}-{abo.examsection}</p><br/>
+                    <p style={{textAlign:"left"}}>{abo.test}-{abo.examsection}</p><br/>
                         <h1>{abo.context}</h1>
                             <div className="row">{pic}</div><hr></hr>
                 </div>
@@ -111,8 +111,17 @@ export class Questions extends Component {
                 { ques.map((q,index)=>
                     <div style={{textAlign:'left'}}key={index} >
                         
-                        <div><h2><strong style={{color:'brown'}}>Question:  {index+1}</strong><br/><br/>{q.question}</h2></div><br/>
-                        <div className="pull-right"><h4 id="marking"><em style={{color:'brown'}}>Correct:</em>({q.marking.correct})   ,  <em style={{color:'brown'}}>Incorrect:</em>({q.marking.incorrect})</h4></div><hr/><br/><br/>
+                        <div><h2>
+                         <strong style={{color:'brown'}}>Question:  {index+1}</strong><br/><br/>
+                         {q.question}
+                        </h2><br/>
+
+                        {(q.type==='mcq')?
+                        ((q.mcqma)?<span style={{color:'blue'}}>(Multiple Correct Answer)</span>:<sapn style={{color:'blue'}}>(Single Correct Answer)</sapn>)
+                        :<span style={{color:'blue'}}>(Numerical)</span>}
+                        
+
+                        <h4 style={{textAlign:'right'}}><em style={{color:'brown'}}>Correct:</em>({q.marking.correct})  ,  <em style={{color:'brown'}}>Incorrect:</em>({q.marking.incorrect})</h4></div><hr/><br/><br/>
                         <div><br/>
                          <div style={{textAlign:'left'}}id="option">  
 
@@ -121,7 +130,7 @@ export class Questions extends Component {
                         { (q.type==='mcq')?(q.options.map((op,index)=>
                                 <div id="li" style={{marginLeft:'5px'}} key={index}>
                                   
-                        <span><h3><em>{op.option}     </em>{(q.mcqma)?<input value={this.state.checkbox} name='checkbox' onChange={this.output} type="checkbox" />
+                        <span><h3><em>{op.option}     </em>{(q.mcqma)?<input  value={this.state.checkbox} name='checkbox' onChange={this.output} type="checkbox" />
                         :<input name='radio' value={this.state.radio} onChange={this.output} type="radio" />}</h3></span><br/>
                             
                              </div>))
@@ -139,9 +148,9 @@ export class Questions extends Component {
                 )}
                 </div>
               </div>
-                        <button onClick={this.next} className="btn btn-lg btn-success pull-right">Next</button>
+                        <button onClick={this.next} id="next" className="btn btn-lg btn-success pull-right">Next</button>
                         
-                        <button onClick={this.prev} className="btn btn-lg btn-success pull-left">Previous</button>
+                        <button onClick={this.prev} id="prev" className="btn btn-lg btn-success pull-left">Previous</button>
             </div>
         
                                 

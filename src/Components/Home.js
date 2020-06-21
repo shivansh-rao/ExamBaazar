@@ -13,7 +13,7 @@ export class Home extends Component {
         }
     }
     componentDidMount=()=>{
-        var api_key='######';
+        var api_key=8107065529;
         axios.get('https://www.exambazaar.com/api/coding-round/routes/exam-info/'+api_key)
         .then(response=>{
              console.log(response.data.data.exams);
@@ -26,7 +26,9 @@ export class Home extends Component {
        console.log(prop)
    }
 
-
+   componentWillUnmount=()=>{
+       localStorage.clear()
+   }
     render() {
         const {exams,streams}=this.state
         

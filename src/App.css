@@ -25,7 +25,7 @@ body {
     width:200px;
     border-radius: 100px;
     text-align: center;
-    margin:0px 200px 0px 200px;
+    margin:50px 200px 0px 200px;
     
   }
   .dropdown-menu{
@@ -52,7 +52,7 @@ body {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     padding:2px;
-    background: linear-gradient(rgb(60, 218, 157), rgb(183, 192, 218));
+    background: linear-gradient(rgb(32, 100, 146), rgb(183, 192, 218));
     
   }
   #abc{
@@ -62,6 +62,7 @@ body {
     min-width:100px;
     padding:1px;
     border:none;
+    background: burlywood;
     
   }
   #img{
@@ -70,6 +71,7 @@ body {
    
   #que{
     margin: 80px;
+    padding:20px;
   }
 
   #que h1,h2,h3,h4,h5,h6,p{
@@ -86,9 +88,21 @@ body {
   }
   #li{
     margin:5px;
-    height: 100px;
+    min-height: 100px;
     border-radius: 25px;
     padding:5px;
     background: linear-gradient(rgb(60, 218, 157), rgb(183, 192, 218));
   }
-  
+  #next{
+    margin-bottom:50px;
+    margin-right:20px;
+    width:200px;
+    background:rgb(49, 139, 49) ;
+  }
+    #prev{
+    margin-bottom:50px;
+    margin-left:20px;
+    width:200px;
+    background:rgb(187, 90, 90);
+    
+  }
