@@ -15,7 +15,7 @@ export class Questions extends Component {
         }
     }
 
-    componentWillMount=()=>{
+    componentDidMount=()=>{
         
       var  api={
            api_key: "#######",
@@ -53,7 +53,7 @@ export class Questions extends Component {
         
         arr.push(this.state.abo)
         localStorage.setItem('pre',JSON.stringify(arr));
-        this.componentWillMount();
+        this.componentDidMount();
     }
 
     prev=()=>{
